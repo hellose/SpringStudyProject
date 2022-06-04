@@ -14,6 +14,8 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<spring.version>5.2.9.RELEASE</spring.version>
 		<tomcat.version>9.0.19</tomcat.version>
+		<gson.version>2.8.5</gson.version>
+		<lombok.version>1.18.22</lombok.version>
 	</properties>
 
 	<build>
@@ -45,6 +47,19 @@
 		</dependency>
 
 
+		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
+		<!-- sts의 경우 Lombook 오류가 존재하여 따로 설정해야함 -->
+		<!-- .m2의 jar파일을 압축해제 (java -jar lombok버전.jar) -->
+		<!-- 설치시 sts 실행파일 선택(.exe파일) -->
+		<!-- 설정하지 않으면 작동안함 -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+			<version>${lombok.version}</version>
+			<scope>provided</scope>
+		</dependency>
+
+
 		<!-- Jackson -->
 		<dependency>
 			<groupId>org.codehaus.jackson</groupId>
@@ -73,10 +88,16 @@
 		</dependency>
 
 
+		<!-- https://mvnrepository.com/artifact/com.google.code.gson/gson -->
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>${gson.version}</version>
+		</dependency>
 
 
 
-
+		<!-- 나중에 정리 -->
 		<!-- https://mvnrepository.com/artifact/org.apache.tiles/tiles-jsp -->
 		<dependency>
 			<groupId>org.apache.tiles</groupId>

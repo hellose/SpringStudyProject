@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-ajaxTest 페이지
+ajax test1
 </body>
 </html>
