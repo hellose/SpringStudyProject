@@ -6,13 +6,76 @@
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
 	<context:component-scan
-		base-package="springstudy" />
+		base-package="studyController" />
 
-	<bean id="viewResolver"
+	<!-- 1. HandlerMapping -->
+	<!-- 스프링에서 기본 설정되는 BeanNameUrlHandlerMapping, RequestMappingHandlerMapping -->
+
+	<!-- 다른 HandlerMapping과 함께 사용할 때 우선 순위 order필드를 설정하기 위해서 선언 -->
+	<bean
+		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
+		<property name="order" value="1" />
+	</bean>
+
+	<!-- bean id="/url" 형식이면 맵핑 -->
+	<bean
+		class="org.springframework.web.servlet.handler.BeanNameUrlHandlerMapping">
+		<property name="order" value="2" />
+	</bean>
+
+
+
+	<!-- 2. HandlerAdapter -->
+	<!-- 스프링에서 기본 설정되는 SimpleControllerHandlerAdapter, RequestMappingHandlerAdapter -->
+
+	<!-- json에 해당하는 http message body를 java 객체로 변환하기 위한 설정 -->
+	<!-- messageConverter 사용하기 위해 선언? -->
+	<bean
+		class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+		<property name="messageConverters">
+			<list>
+				<bean
+					class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
+					<property name="supportedMediaTypes">
+						<list>
+							<value>text/html;charset=UTF-8</value>
+							<value>application/json;charset=UTF-8</value>
+						</list>
+					</property>
+				</bean>
+			</list>
+		</property>
+	</bean>
+
+
+
+	<!-- 3. ViewResolver -->
+
+
+	<!-- BeanNameViewResolver (bean의 이름으로 viewResolver를 사용) -->
+	<!-- jsonView를 사용하기 위해 선언 -->
+	<bean
+		class="org.springframework.web.servlet.view.BeanNameViewResolver">
+		<property name="order" value="0" />
+	</bean>
+
+	<bean id="jsonView"
+		class="org.springframework.web.servlet.view.json.MappingJackson2JsonView">
+		<property name="contentType"
+			value="application/json;charset=UTF-8">
+		</property>
+	</bean>
+
+	<!-- 스프링 기본 설정되는 InternalResourceViewResolver로 prefix,suffix프로퍼티는 설정되어 있지 
+		않다 -->
+	<!-- prefix, suffix를 사용하려면 선언해야 한다. -->
+	<bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<property name="order" value="2"></property>
-		<property name="prefix" value="/WEB-INF/view/" />
+		<property name="prefix" value="/WEB-INF/view" />
 		<property name="suffix" value=".jsp" />
 	</bean>
+
+
+
 
 </beans>
