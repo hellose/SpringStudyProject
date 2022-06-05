@@ -1,0 +1,36 @@
+MariaDB 사이트에서 다운로드
+
+다운로드 시 default로 thrid party app으로 HeidiSQL이 같이 설치됨
+설치 중간에 뜨는 창에서 인코딩 설정 utf-8 체크 필요
+설치 중간에 뜨는 창으로 MariaDB 루트 계정의 비밀번호 설정
+
+1. CLI 사용시
+cmd에서 MariaDB설치경로/bin 디렉토리에서 명령어 사용
+불편하기 때문에 환경 변수를 추가하여 사용
+
+시스템 환경 변수 편집
+- Path 시스템 변수 선택 후 편집 클릭
+- 새로 만들기
+MariaDB 설치경로/bin
+(나의 경우) C:\Program Files\MariaDB 10.6\bin
+
+로그인 
+mysql -u root -p 입력(root 계정 로그인)
+MariaDB설치시 설정한 root 계정 비밀번호 입력(입력시 한/영 구분 주의)
+
+status
+현재 로그인된 사용자, 서버, 서버버전, 포트번호 등을 확인가능
+
+
+2. GUI 사용
+HeidiSQL을 통해 사용가능
+
+3. 비밀번호 변경
+로그인 후
+use mysql;
+select host, user, password from user;
+set password for 'root'@'localhost' = PASSWORD('설정할 비밀번호 입력'); #PASSWORD함수는 암호화
+flush privileges;
+
+
+ 

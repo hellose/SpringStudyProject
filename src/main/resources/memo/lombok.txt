@@ -1,0 +1,4 @@
+sts의 경우 Lombook 오류가 존재하여 따로 설정해야함 
+.m2의 jar파일을 압축해제 (java -jar lombok버전.jar) 
+설치시 sts 실행파일 선택(.exe파일)
+설정하지 않으면 어노테이션 작동안함 
